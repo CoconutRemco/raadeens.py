@@ -9,7 +9,7 @@ for j in range(20):
     for i in range(10):
         guess1 = input("Raad het nummer van 1 tm 1000")
         if int(guess1) == num1:
-            score + 1
+            score += 1
             print("wow u heeft het nummer geraden!")
             print("Ronde " + str(ronde) + " is afgelopen score= " + str(score))
             spelen = input("Nog een keer spelen? 1 ja 2 nee")
