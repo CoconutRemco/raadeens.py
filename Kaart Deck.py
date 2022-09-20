@@ -8,4 +8,4 @@ for j in mycards:
             mymadedeck = mymadedeck[:54]
             print(mymadedeck[0:7])
             input("Enter om uw volledige deck te zien")
-            print(mymadedeck)
+            print(mymadedeck[7:54])
