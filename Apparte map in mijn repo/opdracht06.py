@@ -1,4 +1,5 @@
 import fruitmand
 
-
-print(fruitmand.fruitmand[1]['weight'])
+for i in range(len(fruitmand.fruitmand)):
+    if fruitmand.fruitmand[i]['name'] == 'appel':
+        print(fruitmand.fruitmand[i]['weight'])

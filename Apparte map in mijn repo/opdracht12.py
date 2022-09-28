@@ -1,4 +1,13 @@
 import fruitmand
+colorst= {"pink" : "roze",
+          "red" : "rood",
+          "blue" : "blauw",
+          "yellow" : "geel",
+          "brown" : "bruin",
+            "green" : "groen",
+           "purple" : "paars",
+           "orange" : "oranje"}
+
 langstefruit = {"name":""}
 for f in fruitmand.fruitmand:
     if len(langstefruit["name"]) < len(f['name']):
@@ -7,14 +16,6 @@ naamlangstefruit = langstefruit['name']
 gewichtlangstefruit = langstefruit['weight']/1000
 kleurlangstefruit = langstefruit['color']
 lengtenaamlangstefruit= len(langstefruit['name'])
-if kleurlangstefruit == 'orange':
-    kleurlangstefruit = 'oranje'
-elif kleurlangstefruit == 'brown':
-    kleurlangstefruit = 'bruin'
-elif kleurlangstefruit == 'green':
-    kleurlangstefruit = 'groen'
-elif kleurlangstefruit == 'red':
-    kleurlangstefruit = 'red'
-else:
-    kleurlangstefruit = 'yellow'
-print("De " + naamlangstefruit + " ("+ str(lengtenaamlangstefruit) + " Letters) Heeft een " + kleurlangstefruit + " kleur en een gewicht van " + str(gewichtlangstefruit) + "KG")
+
+
+print("De " + naamlangstefruit + " ("+ str(lengtenaamlangstefruit) + " Letters) Heeft een " + colorst[kleurlangstefruit] + " kleur en een gewicht van " + str(gewichtlangstefruit) + "KG")

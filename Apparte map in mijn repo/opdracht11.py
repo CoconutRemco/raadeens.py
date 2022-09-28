@@ -1,8 +1,13 @@
 import fruitmand
 rond = 0
 nietrond = 0
-kleur = input('Welke kleur wilt u? yellow, green, orange, red, brown? ').lower()
-if kleur == 'yellow' or kleur == 'green' or kleur == 'orange' or kleur == 'red' or kleur == 'brown':
+colors = []
+for j in range(len(fruitmand.fruitmand)):
+    if fruitmand.fruitmand[j]['color'] not in colors:
+        colors.append(fruitmand.fruitmand[j]['color'])
+print(colors)
+kleur = input('Welke kleur wilt u? ').lower()
+if kleur in colors:
     pass
 else:
     print('HEY ' +kleur+ ' IS GEEN KLEUR UIT DE LIJSTTT')
