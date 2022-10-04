@@ -1,5 +1,6 @@
 import random
-
+var2 = False
+var1 = True
 namenloodjes = []
 loodjes = {}
 names = []
@@ -12,7 +13,7 @@ for i in range(3):
     else:
         print("HOO IS EVEN ER IS EEN DUBBELE NAAM IN GEVULD GEKKIE")
     if len(names) == 3:
-        for i in range(10):
+        while var1 == True:
             ja = input('Nog een naam toevoegen? 1 ja 2 nee')
             if ja == '1':
                 name = input("Voer een unieke naam in")
@@ -21,15 +22,25 @@ for i in range(3):
                     namenloodjes.append(name)
                 else:
                     print("HOO IS EVEN ER IS EEN DUBBELE NAAM IN GEVULD GEKKIE")
-            print(len(names))
+            else:
+                var1 = False
         for i in range(len(names)):
             randomname=random.choice(namenloodjes)
-            namenloodjes.remove(randomname)
             loodje=random.choice(names)
-            names.remove(loodje)
             if loodje == randomname:
-                pass
+                var2 = True
+                while var2 == True:
+                    randomname=random.choice(namenloodjes)
+                    loodje=random.choice(names)
+                    if loodje != randomname:
+                        var2 = False
+                        names.remove(loodje)
+                        namenloodjes.remove(randomname)
+                        loodjes[randomname]=loodje
+
             else:
+                names.remove(loodje)
+                namenloodjes.remove(randomname)
                 loodjes[randomname]=loodje
         print(loodjes)
     
