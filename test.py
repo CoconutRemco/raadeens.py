@@ -1,11 +1,13 @@
-try:
-    if "a" < "B":
-        print("OK")
-    else: 
-        print("NOK")
-except:
-    print("ERROR")
+namenenleeftijden = {}
+listnamenenleeftijden = []
+def namenenleeftijden_func():
+    naam = input("Wat is uw naam?")
+    leeftijd = input("Wat is uw leeftijd?")
+    namenenleeftijden[naam] = leeftijd
+    listnamenenleeftijden.append(namenenleeftijden)
+    return listnamenenleeftijden
 
+        
 
 
 
