@@ -25,5 +25,12 @@ if int(leeftijd) > 17:
             print("U krijgt de cola gratis!")
         else:
             print("Oke geniet van uw Cola")
+
+    if sticker == 0:
+        print("Als u nou toch nog alcohol wilt kan u een fake id kopen bij Merlijn De Groot!!")
+        fakeid = input("Wilt u toch een fake id kopen?")
+        if fakeid == 'Ja':
+            print("U heeft nu een bandje!")
+            bandje = 2
 else:
     print("Helaas u word niet toegelaten!")
