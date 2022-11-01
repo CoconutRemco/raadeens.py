@@ -1,11 +1,4 @@
-def hello():
+def hello(number):
     print("Hello from function town!")
+    number = int(input("Voer een getal in!"))
 
-
-number = input("Voer een getal in!")
-if number == "3":
-    for i in range(int(number)):
-        hello()
-elif number == "7":
-    for i in range(int(number)):
-        hello()
