@@ -1,14 +1,21 @@
 
-
 def hello():
-    return "Hallo "
+    print("Hello")
 
-def dag():
-    return "Het is vandaag donderdag"
+hello()
 
-def groet():
-    antwoord = hello() + dag()
-    print(antwoord)
+i=12
+g=13
 
-groet()
+def optellen():
+    antwoord=i+g
+    return antwoord
+
+antwoord=optellen()
+print(antwoord*3)
+
+def printnaam(naam):
+    print("Hallo ",naam)
+
+printnaam("Tobias")
 

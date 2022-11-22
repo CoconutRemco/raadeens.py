@@ -16,4 +16,4 @@ for j in mycards:
         i+=1
         print("Kaart " +str(i) + ": " + str( mymadedeck[int(i)]))
     print("deck (47 kaarten)" + str(mymadedeck[7:54]))
-    print(len(mymadedeck))
+    
