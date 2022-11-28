@@ -1,7 +1,6 @@
 import time
-
-from data import (COST_FOOD_HORSE_COPPER_PER_DAY,
-                  COST_FOOD_HUMAN_COPPER_PER_DAY, JOURNEY_IN_DAYS)
+import math
+from data import (COST_FOOD_HORSE_COPPER_PER_DAY,COST_FOOD_HUMAN_COPPER_PER_DAY,JOURNEY_IN_DAYS,COST_HORSE_SILVER_PER_DAY,COST_TENT_GOLD_PER_WEEK)
 from termcolor import colored
 
 ##################### M04.D02.O2 #####################
@@ -65,21 +64,48 @@ def getAdventuringFriends(friends:list) -> list:
 ##################### M04.D02.O6 #####################
 
 def getNumberOfHorsesNeeded(people:int) -> int:
-    pass
+    numberofhorsesneeded=people/2
+    return math.ceil(numberofhorsesneeded)
 
 def getNumberOfTentsNeeded(people:int) -> int:
-    pass
+    numberoftentsneeded=people/3
+    math.ceil(numberoftentsneeded)
+    return math.ceil(numberoftentsneeded)
 
 def getTotalRentalCost(horses:int, tents:int) -> float:
-    pass
+    costhorses=horses*5*JOURNEY_IN_DAYS
+    costhorsesingold=silver2gold(costhorses)
+    costtents=tents*3*2
+    totalcost=costhorsesingold+costtents
+    return totalcost
 
 ##################### M04.D02.O7 #####################
 
 def getItemsAsText(items:list) -> str:
-    pass
+    namenitems = []
+    for i in range(len(items)):
+        naam= items[i]['name']
+        aantal =items[i]['amount']
+        unit =items[i]['unit']
+        itemsastext=aantal,unit,naam
+        namenitems.append(itemsastext)
+        
+    return namenitems
 
 def getItemsValueInGold(items:list) -> float:
-    pass
+    prijsproduct=0
+    for i in items:
+        type=i['price']['type']
+        prijs=i['price']['amount']
+        aantal=i['amount']
+        if type=='copper':
+            prijstotaal=copper2gold(prijs)*aantal
+        elif type=='silver':
+            prijstotaal=silver2gold(prijs)*aantal
+        elif type=='gold':
+            prijstotaal=prijs*aantal
+        prijsproduct+=prijstotaal
+    return prijsproduct
 
 ##################### M04.D02.O8 #####################
 

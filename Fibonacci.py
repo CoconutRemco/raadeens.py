@@ -31,8 +31,6 @@ integers = [1, 2, 3]
 strings = [str(integer) for integer in var2]
 a_string = "". join(strings)
 variabele2 = int(a_string)
-print(variabele1)
-print(variabele2)
 print(variabele1+variabele2/variabele1)
 
 

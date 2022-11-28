@@ -7,7 +7,7 @@ def berekenfibonacci(n):
    else:
        return(berekenfibonacci(n-1) + berekenfibonacci(n-2))
 
-nterms = random.randint(4,30)
+nterms = random.randint(4,300)
 
 
 if nterms <= 0:
