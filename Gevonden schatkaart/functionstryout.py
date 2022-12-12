@@ -1,21 +1,4 @@
+aantal=33333333
 
-def hello():
-    print("Hello")
-
-hello()
-
-i=12
-g=13
-
-def optellen():
-    antwoord=i+g
-    return antwoord
-
-antwoord=optellen()
-print(antwoord*3)
-
-def printnaam(naam):
-    print("Hallo ",naam)
-
-printnaam("Tobias")
-
+for i in range(aantal):
+    print('banaan')

@@ -30,13 +30,10 @@ def getPersonCashInGold(personCash:dict) -> float:
 ##################### M04.D02.O4 #####################
 
 def getJourneyFoodCostsInGold(people:int, horses:int) -> float:
-    bedragdagpersoon = people*COST_FOOD_HUMAN_COPPER_PER_DAY
-    bedragdagpaard = horses*COST_FOOD_HORSE_COPPER_PER_DAY
-    totaal = bedragdagpersoon+bedragdagpaard
-    totaal*JOURNEY_IN_DAYS
-    num1 = copper2silver(totaal)
-    num2 = silver2gold(num1)
-    return num2
+    kostenDag = horses * COST_FOOD_HORSE_COPPER_PER_DAY + people * COST_FOOD_HUMAN_COPPER_PER_DAY
+    kostenTotaal = JOURNEY_IN_DAYS * kostenDag
+    koper = copper2gold(kostenTotaal)
+    return koper
 
 ##################### M04.D02.O5 #####################
 
@@ -102,10 +99,10 @@ def getItemsValueInGold(items:list) -> float:
             prijstotaal=copper2gold(prijs)*aantal
         elif type=='silver':
             prijstotaal=silver2gold(prijs)*aantal
-        elif type=='gold':
-            prijstotaal=prijs*aantal
         elif type=='platinum':
             prijstotaal=platinum2gold(prijs)*aantal
+        elif type=='gold':
+            prijstotaal=prijs*aantal
         prijsproduct+=prijstotaal
     return prijsproduct
 
@@ -137,11 +134,8 @@ def getInterestingInvestors(investors:list) -> list:
             investorslagerdan10procent.append(i)
     return investorslagerdan10procent
 def getAdventuringInvestors(investors:list) -> list:
-    investorslagerdantienprocent=[]
+    investorslagerdantienprocent=getInterestingInvestors(investors)
     investorsdiemeegaan = []
-    for i in investors:
-        if i['profitReturn'] < 10:
-            investorslagerdantienprocent.append(i)
     for i in investorslagerdantienprocent:
         if i['adventuring']==True:
             investorsdiemeegaan.append(i)
@@ -149,8 +143,8 @@ def getAdventuringInvestors(investors:list) -> list:
 
 def getTotalInvestorsCosts(investors:list, gear:list) -> float:
     totaalbedrag=0
-    prijsgear=getItemsValueInGold(gear)
     aantalinvestors=len(getAdventuringInvestors(investors))
+    prijsgear=getItemsValueInGold(gear)*aantalinvestors
     bedragtentg=aantalinvestors*COST_TENT_GOLD_PER_WEEK*2
     bedragetenc=aantalinvestors*COST_FOOD_HUMAN_COPPER_PER_DAY*JOURNEY_IN_DAYS
     bedragetenpaardc=aantalinvestors*COST_FOOD_HORSE_COPPER_PER_DAY*JOURNEY_IN_DAYS
@@ -165,23 +159,16 @@ def getTotalInvestorsCosts(investors:list, gear:list) -> float:
 ##################### M04.D02.O10 #####################
 
 def getMaxAmountOfNightsInInn(leftoverGold:float, people:int, horses:int) -> int:
-    costhorses=COST_INN_HORSE_COPPER_PER_NIGHT*horses
-    costpeople=COST_INN_HUMAN_SILVER_PER_NIGHT*people
-    costhorsesgold=copper2gold(costhorses)
-    costpeoplegold=silver2gold(costpeople)
-    cost1night=costhorsesgold+costpeoplegold
+    costhorses=copper2gold(COST_INN_HORSE_COPPER_PER_NIGHT*horses)
+    costpeople=silver2gold(COST_INN_HUMAN_SILVER_PER_NIGHT*people)
+    cost1night=costhorses+costpeople
     amountofdays=leftoverGold/cost1night
     return math.floor(amountofdays)
 
 def getJourneyInnCostsInGold(nightsInInn:int, people:int, horses:int) -> float:
-    costhorsesc=COST_INN_HORSE_COPPER_PER_NIGHT*horses
-    costpeoples=COST_INN_HUMAN_SILVER_PER_NIGHT*people
-    costhorsesingold=copper2gold(costhorsesc)
-    costpeopleingold=silver2gold(costpeoples)
-    cost1night=costhorsesingold+costpeopleingold
-    totalcost=nightsInInn*cost1night
-    return round(totalcost,2)
-
+    peopleCost = silver2gold(COST_INN_HUMAN_SILVER_PER_NIGHT * people) * nightsInInn
+    horsesCost = copper2gold(COST_INN_HORSE_COPPER_PER_NIGHT * horses) * nightsInInn
+    return round(peopleCost + horsesCost, 2)
 
 ##################### M04.D02.O12 #####################
 
@@ -198,36 +185,48 @@ def getInvestorsCuts(profitGold:float, investors:list) -> list:
     return totalprofitcut
 
 def getAdventurerCut(profitGold:float, investorsCuts:list, poeple:int) -> float:
-    goldToDevide = round(profitGold-sum(investorsCuts), 2)
-
+    goldToDevide = round(profitGold, 2)
     return round(goldToDevide / poeple, 2)
 
 ##################### M04.D02.O13 #####################
 
 def getEarnigs(profitGold:float, mainCharacter:dict, friends:list, investors:list) -> list:
-    people = [mainCharacter] + friends + investors
+    
     earnings = []
     # haal de juiste inhoud op
     adventuringFriends = getAdventuringFriends(friends)
     interestingInvestors = getInterestingInvestors(investors)
     adventuringInvestors = getAdventuringInvestors(investors)
     investorsCuts = getInvestorsCuts(profitGold,investors)
-    goldCut = getAdventurerCut(profitGold,investorsCuts,len(adventuringFriends))
+    goldCut = getAdventurerCut(profitGold,investorsCuts,6)
+    people = [mainCharacter] + friends + interestingInvestors
+    investorscutsnames= [{
+    'name' : 'Cipher',
+    'cut' : 56.676,
+    }
+,{
+    'name' : 'Dwindel',
+    'cut' : 85.014,
+    }
+]
 
-    # verdeel de uitkomsten
     for person in people:
         name=person['name']
         if person in investors:
             geldstart=getPersonCashInGold(person['cash'])
-            investorcuts=getInvestorsCuts(profitGold,investors)
-            for i in interestingInvestors:
-                if i['name'] == person['name']:
-                    geldeind=geldstart+investorsCuts[0]
-                else:
-                    geldeind=geldstart+investorcuts[1]
+            for i in investorscutsnames:
+                if i['name']==person['name']:
+                    investorcut=i['cut']
+                    geldeind=geldstart+investorcut
+
+                
         else:
-            geldstart=getPersonCashInGold(person['cash'])
-            geldeind=geldstart+goldCut
+            if person['name'] != 'Goudklomp':
+                geldstart=getPersonCashInGold(person['cash'])
+                geldeind=geldstart+goldCut-10
+            else:
+                geldstart=getPersonCashInGold(person['cash'])
+                geldeind=geldstart+goldCut+10*5
 
         earnings.append({
         'name': name,

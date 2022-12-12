@@ -10,7 +10,7 @@ def recur_fibo(n):
    else:
        return(recur_fibo(n-1) + recur_fibo(n-2))
 
-nterms = random.randint(32,33)
+nterms = random.randint(300,3033)
 fibonaci = []
 # check if the number of terms is valid
 if nterms <= 0:
