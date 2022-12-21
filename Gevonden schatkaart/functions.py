@@ -194,9 +194,7 @@ def getEarnigs(profitGold:float, mainCharacter:dict, friends:list, investors:lis
     
     earnings = []
     # haal de juiste inhoud op
-    adventuringFriends = getAdventuringFriends(friends)
     interestingInvestors = getInterestingInvestors(investors)
-    adventuringInvestors = getAdventuringInvestors(investors)
     investorsCuts = getInvestorsCuts(profitGold,investors)
     goldCut = getAdventurerCut(profitGold,investorsCuts,6)
     people = [mainCharacter] + friends + interestingInvestors
